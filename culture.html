@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culture & Values - Miyyeti Allah Kautal Hore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="Styles/about.css"> -->
+     <style>
+         :root {
+            --primary: #2a6d38;
+            --secondary: #d8ae5e;
+            --accent: #8a5d24;
+            --light: #f5f0e6;
+            --dark: #1a2a1a;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 80px; /* Account for fixed header */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            overflow: hidden;
+            margin-right: 15px;
+            background-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-subtext {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .language-selector {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        nav {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.8rem 0;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .nav-list li {
+            margin: 0 1.5rem;
+        }
+        
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-list a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-list a:hover:after {
+            width: 100%;
+        }
+        
+        /* Active link */
+        .nav-list a.active {
+            color: var(--secondary);
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .hamburger span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Pulaaku Section */
+        .pulaaku {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .pulaaku-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        /* Cultural Elements Section */
+        .cultural-elements {
+            margin-bottom: 4rem;
+        }
+        
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .element-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .element-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .element-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Traditions Section */
+        .traditions {
+            background-color: #f9f6f0;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .traditions-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .tradition-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .tradition-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .tradition-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Cultural Gallery */
+        .gallery {
+            margin-bottom: 4rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Quotes Section */
+        .quotes {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .quote:before, .quote:after {
+            content: """;
+            font-size: 3rem;
+            color: var(--secondary);
+            position: absolute;
+        }
+        
+        .quote:before {
+            top: -1rem;
+            left: -2rem;
+        }
+        
+        .quote:after {
+            bottom: -2rem;
+            right: -2rem;
+        }
+        
+        .quote-author {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        /* Links styling */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background: #c2994d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .traditions .section-title,
+        .quotes .section-title {
+            color: white;
+        }
+        
+        .traditions .section-title:after,
+        .quotes .section-title:after {
+            background: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .socials a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+            
+            .hamburger {
+                display: flex;
+                position: absolute;
+                top: 1.5rem;
+                right: 1rem;
+            }
+            
+            /* Mobile Navigation */
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                z-index: 1000;
+                padding: 0;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+            }
+            
+            .nav-list li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-list a {
+                display: block;
+                padding: 0.8rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .pulaaku-content, .traditions-content {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Hamburger Animation */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+     </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo-container">
+                    <a href="index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                        <div class="logo-img">
+                        <img src="images/logo.png" alt="C.O.P.E.R Logo">
+                    </div>
+                        <div>
+                            <div class="logo-text">Miyyeti Allah</div>
+                            <div class="logo-subtext">Fulani Socio-Cultural Association</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i> English | Fulfulde
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hamburger Menu -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav id="nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="culture.html" class="active">Culture & Values</a></li>
+                <li><a href="events.html">Events</a></li>
+                <!-- <li><a href="contact.html">Contact</a></li> -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div style=" background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hqr.jpg') no-repeat center center/cover;" class="page-header">
+        <div class="container">
+            <h1>Fulani Culture & Values</h1>
+        </div>
+    </div>
+
+    <!-- Pulaaku Section -->
+    <section class="pulaaku">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Pulaaku: The Fulani Code of Conduct</h2>
+            <div class="pulaaku-content">
+                <div>
+                    <p>Pulaaku is the foundational cultural concept that defines the Fulani identity and guides behavior. It encompasses a set of virtues that every Fulani person is expected to uphold:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li><strong>Munyal:</strong> Patience, endurance, and self-control in all circumstances</li>
+                        <li><strong>Hakkilo:</strong> Wisdom, prudence, and careful consideration before action</li>
+                        <li><strong>Semteende:</strong> Modesty and reserve in behavior</li>
+                        <li><strong>Ndebbangu:</strong> Reliability and trustworthiness</li>
+                        <li><strong>Ammana:</strong> Loyalty and protection of community interests</li>
+                    </ul>
+                    <p>This code shapes interactions within the Fulani community and with outsiders, promoting dignity, respect, and peaceful coexistence.</p>
+                </div>
+                <div>
+                    <img src="images/kautal.jpg" alt="Fulani elder" style="width: 100%; border-radius: 10px; box-shadow: var(--shadow);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Elements Section -->
+    <section class="cultural-elements">
+        <div class="container">
+            <h2 class="section-title">Key Elements of Fulani Culture</h2>
+            <div class="elements-grid">
+                <div class="element-card">
+                    <div class="element-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Fulfulde Language</h3>
+                    <p>The Fulfulde language is a cornerstone of our cultural identity, with rich oral traditions including poetry, stories, and proverbs that convey wisdom and historical knowledge.</p>
+                </div>
+                <div class="element-card">
+                    <div class="element-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3>Islamic Faith</h3>
+                    <p>Islam plays a central role in Fulani life, influencing our values, practices, and community organization while coexisting with traditional cultural elements.</p>
+                </div>
+                <div class="element-card">
+                    <div class="element-icon">
+                        <i class="fas fa-pastafarianism"></i>
+                    </div>
+                    <h3>Pastoral Heritage</h3>
+                    <p>Our pastoral traditions represent not just an economic activity but a way of life that embodies mobility, environmental knowledge, and resilience.</p>
+                </div>
+                <div class="element-card">
+                    <div class="element-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Culinary Traditions</h3>
+                    <p>Fulani cuisine features dairy products like fura da nono and millet dishes that reflect our pastoral heritage and adaptation to different environments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Traditions Section -->
+    <section class="traditions">
+        <div class="container">
+            <h2 class="section-title">Cultural Traditions & Practices</h2>
+            <div class="traditions-content">
+                <div class="tradition-image">
+                    <img src="images/nai-debbo.jpg" alt="Fulani cultural ceremony">
+                </div>
+                <div>
+                    <h3>Sharo Festival</h3>
+                    <p>The Sharo (flogging) festival is a traditional test of courage and endurance for young Fulani men. Participants willingly undergo whipping to demonstrate their bravery, stamina, and readiness for marriage.</p>
+                    
+                    <h3>Marriage Customs</h3>
+                    <p>Fulani marriage traditions involve intricate processes including courtship, dowry negotiation, and ceremonial celebrations that strengthen family and community bonds.</p>
+                    
+                    <h3>Naming Ceremonies</h3>
+                    <p>Seven days after birth, children are given their formal names in Islamic ceremonies that combine religious traditions with cultural practices specific to Fulani communities.</p>
+                    
+                    <a href="#" class="btn">Learn About Our Events</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Gallery -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Cultural Expressions</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/art.jpg" alt="Fulani art">
+                    <div class="gallery-caption">Fulani traditional art patterns</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/donu.jpg" alt="Fulani clothing">
+                    <div class="gallery-caption">Traditional Fulani attire</div>
+                </div>
+                <!-- <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fulani architecture">
+                    <div class="gallery-caption">Traditional Fulani architecture</div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="quotes">
+        <div class="container">
+            <h2 class="section-title">Wisdom of Our Ancestors</h2>
+            <div class="quote">
+                "A Fulani without cattle is like a bed without a mattress."
+                <div class="quote-author">- Fulani Proverb</div>
+            </div>
+            <div class="quote">
+                "Patience is the key to all doors. The Fulani who is patient will eventually milk the cow."
+                <div class="quote-author">- Fulani Proverb</div>
+            </div>
+            <div class="quote">
+                "The world is but a bridge, pass over it without building your house upon it."
+                <div class="quote-author">- Traditional Fulani Wisdom</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Maliya Cattle market, KM 22 Abuja-Keffi Express way Tudun-Wada, Karu LGC, Nasarawa State Nigeria.</p>
+                    <p><i class="fas fa-phone"></i> +234 903 516 4232</p>
+                    <p><i class="fas fa-envelope"></i> info@kautalhore.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="culture.html">Our Values</a>
+                    <a href="events.html">Events</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Miyyeti Allah Kautal Hore Fulani Socio-Cultural Association. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+         // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('#nav');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+        
+        // Sticky header functionality
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '0.5rem 0';
+                header.style.background = 'var(--primary)';
+            } else {
+                header.style.padding = '1rem 0';
+                header.style.background = 'linear-gradient(to right, var(--primary), var(--accent))';
+            }
+        });
+        
+        // Animation for elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.element-card, .gallery-item, .quote');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (position < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.element-card, .gallery-item, .quote').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

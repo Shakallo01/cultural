@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Miyyeti Allah Kautal Hore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="Styles/about.css"> -->
+     <style>
+        :root {
+            --primary: #2a6d38;
+            --secondary: #d8ae5e;
+            --accent: #8a5d24;
+            --light: #f5f0e6;
+            --dark: #1a2a1a;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 80px; /* Account for fixed header */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            overflow: hidden;
+            margin-right: 15px;
+            background-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-subtext {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .language-selector {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        nav {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.8rem 0;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .nav-list li {
+            margin: 0 1.5rem;
+        }
+        
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-list a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-list a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .hamburger span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(5, 126, 51, 0.6)), url('images/hqr.jpg') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Mission Section */
+        .mission {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        /* History Section */
+        .history-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        
+        .history-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .history-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .history-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Objectives Section */
+        .objectives {
+            background-color: #f9f6f0;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .objective-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .objective-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .objective-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Leadership Section */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .leader-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .leader-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .leader-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .leader-info {
+            padding: 1.5rem;
+        }
+        
+        .leader-role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Organizational Structure */
+        .org-structure {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .org-chart {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            color: var(--dark);
+            margin-top: 2rem;
+        }
+        
+        /* Links styling */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background: #c2994d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .socials a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+            
+            .hamburger {
+                display: flex;
+                position: absolute;
+                top: 1.5rem;
+                right: 1rem;
+            }
+            
+            /* Mobile Navigation */
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                z-index: 1000;
+                padding: 0;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+            }
+            
+            .nav-list li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-list a {
+                display: block;
+                padding: 0.8rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .mission-content, .history-content {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Hamburger Animation */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+     </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo-container">
+                    <a href="index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                        <div class="logo-img">
+                        <img src="images/logo.png" alt="C.O.P.E.R Logo">
+                    </div>
+                        <div>
+                            <div class="logo-text">Miyyeti Allah</div>
+                            <div class="logo-subtext">Fulani Socio-Cultural Association</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i> English | Fulfulde
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hamburger Menu -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav id="nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="culture.html">Culture & Values</a></li>
+                <li><a href="events.html">Events</a></li>
+                <!-- <li><a href="contact.html">Contact</a></li> -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div style=" background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hqr.jpg') no-repeat center center/cover;" class="page-header">
+        <div class="container">
+            <h1>About Our Association</h1>
+        </div>
+    </div>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-content">
+                <div>
+                    <h2>Our Mission</h2>
+                    <p>To preserve, promote, and celebrate the rich cultural heritage of the Fulani people while fostering unity, peace, and development within the Fulani community and throughout Nigeria.</p>
+                </div>
+                <div>
+                    <h2>Our Vision</h2>
+                    <p>To be the foremost organization championing the positive contributions of the Fulani people to Nigeria's socio-cultural tapestry while promoting harmonious coexistence with all ethnic groups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="history">
+        <div class="container">
+            <h2 class="section-title">Our History</h2>
+            <div class="history-content">
+                <div>
+                    <p>Miyyeti Allah Kautal Hore was established with the vision of creating a unified platform for the Fulani people across Nigeria. Our association emerged from the need to preserve our cultural identity while contributing positively to national development.</p>
+                    <p>Since our inception, we have worked tirelessly to educate, empower, and engage both members of the Fulani community and the wider public about our rich heritage, values, and traditions.</p>
+                    <p>Under the distinguished leadership of our National President and the dedicated efforts of our National Director of Culture, we have grown to become the premier Fulani socio-cultural organization in Nigeria.</p>
+                    <a href="#" class="btn">Learn More About Our History</a>
+                </div>
+                <div class="history-image">
+                    <img src="https://images.unsplash.com/photo-1596733430284-f7437764b1a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Fulani cultural gathering">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section class="objectives">
+        <div class="container">
+            <h2 class="section-title">Our Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-icon">
+                        <i class="fas fa-chess-knight"></i>
+                    </div>
+                    <h3>Cultural Preservation</h3>
+                    <p>Document, preserve, and promote Fulani cultural heritage, including language, traditions, music, and pastoral practices.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Community Development</h3>
+                    <p>Initiate and support development projects that improve the lives of Fulani communities across Nigeria.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">
+                        <i class="fas fa-peace"></i>
+                    </div>
+                    <h3>Peace Building</h3>
+                    <p>Promote peaceful coexistence and understanding between Fulani communities and other ethnic groups in Nigeria.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Education Advocacy</h3>
+                    <p>Advocate for educational opportunities and create scholarship programs for Fulani youth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="leadership">
+        <div class="container">
+            <h2 class="section-title">Our Leadership</h2>
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <img src="images/lamido1.jpg" alt="National President" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Alhaji (Dr.) Abdullahi Bello Bodejo</h3>
+                        <div class="leader-role">National President</div>
+                        <p>Leading the association with vision and dedication to fulfill our mission of cultural preservation and community development.</p>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="images/dikko.jpg" alt="National Director of Culture" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Alhaji Amb. Abubakar Dikko Shakallo</h3>
+                        <div class="leader-role">National Director of Culture & Senior Special Assistant to the National President on Fulani Culture and Values</div>
+                        <p>Overseeing the preservation and promotion of Fulani cultural heritage across Nigeria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizational Structure -->
+    <section class="org-structure">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Organizational Structure</h2>
+            <p>Miyyeti Allah Kautal Hore operates through a well-defined structure that ensures effective governance and representation at all levels:</p>
+            
+            <div class="org-chart">
+                <h3>National Executive Council</h3>
+                <p>The highest decision-making body, comprising elected representatives from all states and zones.</p>
+
+                 <h3>Zonal Chapters</h3>
+                <p>Zonal-level structures that implement national programs and address State issues.</p>
+                
+                <h3>State Chapters</h3>
+                <p>State-level structures that implement national programs and address local issues.</p>
+                
+                <h3>Local Government Coordinators</h3>
+                <p>Grassroots representatives who ensure community participation and program implementation.</p>
+                
+                <h3>Special Committees</h3>
+                <p>Task-specific committees focusing on areas such as education, conflict resolution, and cultural affairs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Maliya Cattle market, KM 22 Abuja-Keffi Express way Tudun-Wada, Karu LGC, Nasarawa State Nigeria.</p>
+                    <p><i class="fas fa-phone"></i> +234 903 516 4232</p>
+                    <p><i class="fas fa-envelope"></i> info@kautalhore.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="culture.html">Our Values</a>
+                    <a href="events.html">Events</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Miyyeti Allah Kautal Hore Fulani Socio-Cultural Association. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+     <script>
+         // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('#nav');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+        
+        // Sticky header functionality
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '0.5rem 0';
+                header.style.background = 'var(--primary)';
+            } else {
+                header.style.padding = '1rem 0';
+                header.style.background = 'linear-gradient(to right, var(--primary), var(--accent))';
+            }
+        });
+     </script>
+</body>
+</html>

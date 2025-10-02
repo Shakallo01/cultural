@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Miyyeti Allah Kautal Hore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="Styles/events.css"> -->
+     <style>
+         :root {
+            --primary: #2a6d38;
+            --secondary: #d8ae5e;
+            --accent: #8a5d24;
+            --light: #f5f0e6;
+            --dark: #1a2a1a;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 80px; /* Account for fixed header */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+       .logo-img {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            overflow: hidden;
+            margin-right: 15px;
+            background-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-subtext {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .language-selector {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        nav {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.8rem 0;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .nav-list li {
+            margin: 0 1.5rem;
+        }
+        
+        .nav-list a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-list a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-list a:hover:after {
+            width: 100%;
+        }
+        
+        /* Active link */
+        .nav-list a.active {
+            color: var(--secondary);
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .hamburger span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+        
+        /* Donate Button in Header */
+        .header-donate-btn {
+            display: none; /* Hidden on mobile, shown on desktop */
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-left: 1.5rem;
+        }
+        
+        .header-donate-btn:hover {
+            background: #c2994d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Donate Banner */
+        .donate-banner {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 3rem 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .donate-banner h2 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .donate-banner p {
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+        
+        .donate-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .donate-btn:hover {
+            background: #c2994d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .donate-btn i {
+            margin-left: 0.5rem;
+        }
+        
+        /* Events Filter */
+        .events-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .event-card:hover .event-image img {
+            transform: scale(1.1);
+        }
+        
+        .event-date {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event-day {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+        
+        .event-month {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+        }
+        
+        .event-title {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .event-meta i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .event-meta span {
+            margin-right: 1.5rem;
+        }
+        
+        .event-description {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Upcoming Events Section */
+        .upcoming-events {
+            margin-bottom: 4rem;
+        }
+        
+        /* Past Events Section */
+        .past-events {
+            background-color: #f9f6f0;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 2rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background: #c2994d;
+        }
+        
+        /* Links styling */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #c2994d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .past-events .section-title,
+        .newsletter .section-title {
+            color: white;
+        }
+        
+        .past-events .section-title:after,
+        .newsletter .section-title:after {
+            background: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .socials a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+            
+            .hamburger {
+                display: flex;
+                position: absolute;
+                top: 1.5rem;
+                right: 1rem;
+            }
+            
+            /* Mobile Navigation */
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                z-index: 1000;
+                padding: 0;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+            }
+            
+            .nav-list li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-list a {
+                display: block;
+                padding: 0.8rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 4px;
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-btn {
+                border-radius: 4px;
+                padding: 0.8rem;
+            }
+            
+            /* Show donate button in nav on mobile */
+            .nav-list .header-donate-btn {
+                display: inline-block;
+                margin: 1rem 0;
+            }
+            
+            /* Hamburger Animation */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+        
+        @media (min-width: 769px) {
+            /* Show donate button in header on desktop */
+            .header-donate-btn {
+                display: inline-block;
+            }
+            
+            /* Add donate button to navigation */
+            .nav-list {
+                align-items: center;
+            }
+        }
+     </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo-container">
+                    <a href="index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                        <div class="logo-img">
+                        <img src="images/logo.png" alt="C.O.P.E.R Logo">
+                    </div>
+                        <div>
+                            <div class="logo-text">Miyyeti Allah</div>
+                            <div class="logo-subtext">Fulani Socio-Cultural Association</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i> English | Fulfulde
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hamburger Menu -->
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <nav id="nav">
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="culture.html">Culture & Values</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="donate.html" class="header-donate-btn">Donate Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div style=" background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/hqr.jpg') no-repeat center center/cover;" class="page-header">
+        <div class="container">
+            <h1>Upcoming Events</h1>
+        </div>
+    </div>
+
+    <!-- Donate Banner -->
+    <div class="container">
+        <div class="donate-banner">
+            <h2>Support Our Events & Programs</h2>
+            <p>Your donation helps us organize cultural events, educational programs, and community initiatives that preserve and promote Fulani heritage.</p>
+            <a href="donate.html" class="donate-btn">Donate Now <i class="fas fa-heart"></i></a>
+        </div>
+    </div>
+
+    <!-- Events Filter -->
+    <div class="container">
+        <div class="events-filter">
+            <button class="filter-btn active" data-filter="all">All Events</button>
+            <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+            <button class="filter-btn" data-filter="past">Past Events</button>
+            <button class="filter-btn" data-filter="cultural">Cultural</button>
+            <button class="filter-btn" data-filter="educational">Educational</button>
+            <button class="filter-btn" data-filter="community">Community</button>
+        </div>
+    </div>
+
+    <!-- Upcoming Events Section -->
+    <section class="upcoming-events">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-grid">
+                <!-- Event 1 -->
+                <div class="event-card" data-category="upcoming cultural">
+                    <div class="event-image">
+                        <img src="images/group.jpg" alt="National Cultural Festival">
+                    </div>
+                    <div class="event-date">
+                        <span class="event-day">15</span>
+                        <span class="event-month">JAN 2026</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category category-cultural">Cultural Festival</span>
+                        <h3 class="event-title">National Cultural Festival</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Abuja National Stadium</span>
+                            <span><i class="fas fa-clock"></i> 10:00 AM</span>
+                        </div>
+                        <p class="event-description">Join us for a celebration of Fulani culture featuring traditional music, dance, poetry, and cuisine. This annual event brings together Fulani communities from across Nigeria.</p>
+                        <a href="#" class="btn">Register Now</a>
+                    </div>
+                </div>
+                
+                <!-- Event 2 -->
+                <div class="event-card" data-category="upcoming educational">
+                    <div class="event-image">
+                        <img src="images/logo.png" alt="Youth Leadership Workshop">
+                    </div>
+                    <div class="event-date">
+                        <span class="event-day">22</span>
+                        <span class="event-month">MAY 2026</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category category-educational">Educational</span>
+                        <h3 class="event-title">Youth Leadership Workshop</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Maliya Karu, Nasarawa State</span>
+                            <span><i class="fas fa-clock"></i> 9:00 AM</span>
+                        </div>
+                        <p class="event-description">Empowering the next generation of Fulani leaders through skills development, cultural education, and leadership training. Open to ages 18-30.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Event 3 -->
+                <div class="event-card" data-category="upcoming community">
+                    <div class="event-image">
+                        <img src="images/meeting.jpg" alt="Community Dialogue Session">
+                    </div>
+                    <div class="event-date">
+                        <span class="event-day">05</span>
+                        <span class="event-month">Nov 2025</span>
+                    </div>
+                    <div class="event-content">
+                        <span class="event-category category-community">Community</span>
+                        <h3 class="event-title">Community Dialogue Session</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Maliya Karu, Nasarawa State</span>
+                            <span><i class="fas fa-clock"></i> 2:00 PM</span>
+                        </div>
+                        <p class="event-description">A virtual dialogue session focusing on challenges facing pastoral communities and strategies for sustainable development and peaceful coexistence.</p>
+                        <a href="#" class="btn">Join Meeting</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2 class="section-title">Stay Updated</h2>
+            <p>Subscribe to our newsletter to receive updates about upcoming events and activities</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Maliya Cattle market, KM 22 Abuja-Keffi Express way Tudun-Wada, Karu LGC, Nasarawa State Nigeria.</p>
+                    <p><i class="fas fa-phone"></i> +234 903 516 4232</p>
+                    <p><i class="fas fa-envelope"></i> info@kautalhore.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="culture.html">Our Values</a>
+                    <a href="events.html">Events</a>
+                    <a href="donate.html" style="color: var(--secondary); font-weight: bold;">Donate Now</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Miyyeti Allah Kautal Hore Fulani Socio-Cultural Association. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+     <script>
+         // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('#nav');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+        
+        // Sticky header functionality
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '0.5rem 0';
+                header.style.background = 'var(--primary)';
+            } else {
+                header.style.padding = '1rem 0';
+                header.style.background = 'linear-gradient(to right, var(--primary), var(--accent))';
+            }
+        });
+        
+        // Event filtering functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const eventCards = document.querySelectorAll('.event-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                eventCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const categories = card.getAttribute('data-category').split(' ');
+                        if (categories.includes(filterValue)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Animation for elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.event-card');
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (position < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.event-card').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on load
+        window.addEventListener('load', animateOnScroll);
+     </script>
+</body>
+</html>

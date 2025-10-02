@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Miyyeti Allah Kautal Hore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="Styles/donate.css"> -->
+     <style>
+         :root {
+            --primary: #2a6d38;
+            --secondary: #d8ae5e;
+            --accent: #8a5d24;
+            --light: #f5f0e6;
+            --dark: #1a2a1a;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .donation-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .donation-header h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .donation-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Donation Options */
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .donation-option {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .donation-option:hover {
+            transform: translateY(-10px);
+        }
+        
+        .donation-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .donation-option h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .donation-option p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .donation-option .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Donate Button */
+        .donate-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .donate-btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .modal-tab.active {
+            background: white;
+            border-bottom: 3px solid var(--secondary);
+            font-weight: bold;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .instructions {
+            background: #f9f6f0;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .instructions ol {
+            padding-left: 1.5rem;
+        }
+        
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .bank-details {
+            background: #f9f6f0;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .bank-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .bank-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .bank-detail .label {
+            font-weight: 500;
+        }
+        
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #c2994d;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .socials a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .donation-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                max-width: 100%;
+            }
+            
+            .modal-tabs {
+                flex-direction: column;
+            }
+        }
+     </style>
+</head>
+<body>
+    <div class="container">
+        <div class="donation-header">
+            <h1>Support Our Cause</h1>
+            <p>Your donation helps us preserve and promote Fulani culture, support our community initiatives, and create a better future for generations to come.</p>
+        </div>
+        
+        <div class="donation-options">
+            <div class="donation-option">
+                <div class="donation-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Airtime Donationx</h3>
+                <p>Subscribe to our daily SMS updates and support our cause with a small daily donation.</p>
+                <div class="price">₦50/day</div>
+                <button class="donate-btn" data-type="sms">Donate via SMS</button>
+            </div>
+            
+            <div class="donation-option">
+                <div class="donation-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>Bank Transfer</h3>
+                <p>Make a direct bank transfer to our account. Any amount is appreciated and will make a difference.</p>
+                <div class="price">One-time donation</div>
+                <button class="donate-btn" data-type="bank">Donate via Transfer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donation Modal -->
+    <div class="modal" id="donationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Support Our Cause</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="sms">Airtime Donation</div>
+                <div class="modal-tab" data-tab="bank">Bank Transfer</div>
+            </div>
+            
+            <div class="modal-body">
+                <!-- SMS Donation Tab -->
+                <div class="tab-content active" id="sms-tab">
+                    <div class="instructions">
+                        <h3>How to subscribe:</h3>
+                        <ol>
+                            <li><strong>MTN:</strong>  <span>Text DONATE MAKH to 12345</span> <button class="copy-btn" data-text="DONATE MAKH to 12345">Copy</button></li>
+                            <li><strong>Airtel:</strong> <span>Text DONATE MAKH to 54321</span> <button class="copy-btn" data-text="DONATE MAKH to 54321">Copy</button></li>
+                            <li><strong>Glo:</strong> <span>Text DONATE MAKH to 67890</span> <button class="copy-btn" data-text="DONATE MAKH to 67890">Copy</button></li>
+                            <li><strong>9mobile:</strong> <span>Text DONATE MAKH to 68755</span> <button class="copy-btn" data-text="DONATE MAKH to 68755">Copy</button></li>
+                            <li>You will be charged ₦50 daily</li>
+                        </ol>
+                    </div>
+                    
+                    <form id="sms-form">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="e.g. 08012345678" required>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Subscribe Now</button>
+                    </form>
+                </div>
+                
+                <!-- Bank Transfer Tab -->
+                <div class="tab-content" id="bank-tab">
+                    <div class="bank-details">
+                        <h3>Account Details</h3>
+                        <div class="bank-detail">
+                            <span class="label">Bank Name:</span>
+                            <span class="value">First Bank of Nigeria</span>
+                        </div>
+                        <div class="bank-detail">
+                            <span class="label">Account Name:</span>
+                            <span class="value">Miyyeti Allah Kautal Hore</span>
+                        </div>
+                        <div class="bank-detail">
+                            <span class="label">Account Number:</span>
+                            <span class="value">2034567890 <button class="copy-btn" data-copy="2034567890">Copy</button></span>
+                        </div>
+                    </div>
+                    
+                    <div class="instructions">
+                        <p>After making your transfer, please send proof of payment to <strong>finance@kautalhore.org</strong> or WhatsApp to <strong>+234 903 516 4232</strong> for proper documentation and receipt.</p>
+                    </div>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="success-message" id="success-message">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Thank You!</h3>
+                    <p>Your donation is greatly appreciated. You will receive a confirmation message shortly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Maliya Cattle market, KM 22 Abuja-Keffi Express way Tudun-Wada, Karu LGC, Nasarawa State Nigeria.</p>
+                    <p><i class="fas fa-phone"></i> +234 903 516 4232</p>
+                    <p><i class="fas fa-envelope"></i> info@kautalhore.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="culture.html">Our Values</a>
+                    <a href="events.html">Events</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Miyyeti Allah Kautal Hore Fulani Socio-Cultural Association. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+     <script>
+         // DOM Elements
+        const donationModal = document.getElementById('donationModal');
+        const donateButtons = document.querySelectorAll('.donate-btn');
+        const closeModal = document.querySelector('.close-modal');
+        const modalTabs = document.querySelectorAll('.modal-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const smsForm = document.getElementById('sms-form');
+        const successMessage = document.getElementById('success-message');
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        
+        // Open modal when donate button is clicked
+        donateButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const type = button.getAttribute('data-type');
+                donationModal.style.display = 'flex';
+                
+                // Switch to the appropriate tab
+                if (type === 'bank') {
+                    switchTab('bank');
+                } else {
+                    switchTab('sms');
+                }
+            });
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            donationModal.style.display = 'none';
+            // Reset form and hide success message
+            smsForm.reset();
+            successMessage.style.display = 'none';
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.querySelector(`#sms-tab`).style.display = 'block';
+            document.querySelector(`[data-tab="sms"]`).classList.add('active');
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === donationModal) {
+                donationModal.style.display = 'none';
+                // Reset form and hide success message
+                smsForm.reset();
+                successMessage.style.display = 'none';
+                document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+                document.querySelector(`#sms-tab`).style.display = 'block';
+                document.querySelector(`[data-tab="sms"]`).classList.add('active');
+            }
+        });
+        
+        // Tab switching functionality
+        modalTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                switchTab(tabId);
+            });
+        });
+        
+        function switchTab(tabId) {
+            // Update active tab
+            modalTabs.forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabId) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Show active tab content
+            tabContents.forEach(content => {
+                if (content.id === `${tabId}-tab`) {
+                    content.style.display = 'block';
+                } else {
+                    content.style.display = 'none';
+                }
+            });
+            
+            // Hide success message when switching tabs
+            successMessage.style.display = 'none';
+        }
+        
+        // SMS Form Submission
+        smsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const phoneNumber = document.getElementById('phone').value;
+            
+            // Simple validation
+            if (!phoneNumber || phoneNumber.length < 11) {
+                alert('Please enter a valid phone number');
+                return;
+            }
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide form and show success message
+                smsForm.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Simulate sending SMS (in a real scenario, this would call an API)
+                console.log(`SMS would be sent to ${phoneNumber} with instructions to subscribe`);
+            }, 1000);
+        });
+        
+        // Copy account number functionality
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const textToCopy = button.getAttribute('data-copy');
+                
+                // Use the Clipboard API if available
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(textToCopy)
+                        .then(() => {
+                            // Change button text temporarily
+                            const originalText = button.textContent;
+                            button.textContent = 'Copied!';
+                            setTimeout(() => {
+                                button.textContent = originalText;
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Failed to copy: ', err);
+                        });
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    // Change button text temporarily
+                    const originalText = button.textContent;
+                    button.textContent = 'Copied!';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 2000);
+                }
+            });
+        });
+     </script>
+</body>
+</html>
